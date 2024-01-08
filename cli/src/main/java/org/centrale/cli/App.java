@@ -37,7 +37,7 @@ public class App {
         } else {
             myPick = new Ciseaux();
         }
-        System.out.println("(1=pierre,2=feuille,3=ciseaux) Vous avez choisi : " + yourChoice + " et j'ai choisi " + myChoice + " donc...\n");
+        System.out.println("Vous avez choisi " + yourPick.toString() + " et j'ai choisi " + myPick.toString() + " donc...\n");
         int resultat = myPick.playWith(yourPick);
 
         if (resultat==1){

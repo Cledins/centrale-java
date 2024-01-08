@@ -24,4 +24,9 @@ public class Ciseaux implements Hand{
     public int playWithFeuille(Feuille f) {
         return 1;
     }
+
+    public String toString() {
+        String result = "Ciseaux";
+        return result;
+    }
 }

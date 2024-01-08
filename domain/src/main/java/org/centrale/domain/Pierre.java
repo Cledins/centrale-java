@@ -25,4 +25,9 @@ public class Pierre implements Hand {
     public int playWithFeuille(Feuille f) {
         return -1;
     }
+
+    public String toString() {
+        String result = "Pierre";
+        return result;
+    }
 }

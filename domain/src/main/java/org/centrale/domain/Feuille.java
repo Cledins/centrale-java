@@ -21,4 +21,9 @@ public class Feuille implements Hand{
     public int playWithFeuille(Feuille f) {
         return 0;
     }
+
+    public String toString() {
+        String result = "Feuille";
+        return result;
+    }
 }
