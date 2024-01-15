@@ -21,8 +21,8 @@ class ExampleControllerTest {
 
     @Test
     void testExampleController() {
-        ResponseEntity<String> response = this.restTemplate.getForEntity("http://localhost:" + port + "/test?param=Hello",
+        ResponseEntity<String> response = this.restTemplate.getForEntity("http://localhost:" + port + "/",
                 String.class);
-        assertEquals(response.getBody(), "Hello");
+        assertEquals("Hello !", response.getBody());
     }
 }
