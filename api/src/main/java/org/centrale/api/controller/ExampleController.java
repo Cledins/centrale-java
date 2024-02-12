@@ -1,25 +1,25 @@
 package org.centrale.api.controller;
 
-import org.centrale.api.service.CacheService;
+import jakarta.websocket.server.PathParam;
+import org.centrale.api.GameRepository;
+import org.centrale.api.PlayerEntity;
 import org.centrale.api.service.GameService;
-import org.centrale.api.service.PlayerDBService;
 import org.centrale.domain.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static java.sql.DriverManager.println;
 
 @RestController
 public class ExampleController {
     final GameService gameService;
-    final PlayerDBService playerDBService;
+    final GameRepository gameRepository;
 
-    public ExampleController(GameService gameService, PlayerDBService playerDBService) {
+    public ExampleController(GameService gameService, GameRepository gameRepository) {
         this.gameService = gameService;
-        this.playerDBService = playerDBService;;
+        this.gameRepository = gameRepository;;
     }
 
     @GetMapping("/")
@@ -29,9 +29,14 @@ public class ExampleController {
         return gameService.playGame(playerName1, playerName2);
     }
 
-    @PostMapping("/add")
+    @PostMapping("/player")
     public void addString(@RequestParam String name){
         gameService.addPlayer(name);
+    }
+
+    @GetMapping("/player/{id}")
+    public PlayerEntity getPlayer(@PathVariable("id")Integer id){
+        return gameService.getPlayerInfo(id);
     }
 
     @PostMapping("/remove")
@@ -49,9 +54,10 @@ public class ExampleController {
     public void setHand(@RequestParam String name,
                         @RequestParam int hand ){
         gameService.setHand(name, hand);
+
     }
 
-    @PostMapping("pouet")
-    public void pouet(@RequestParam Integer id, @RequestParam String name){ playerDBService.addPlayer(id, name);}
+    //@PostMapping("pouet")
+    //public void pouet(@RequestParam Integer id, @RequestParam String name){ playerDBService.addPlayer(id, name);}
 
 }
