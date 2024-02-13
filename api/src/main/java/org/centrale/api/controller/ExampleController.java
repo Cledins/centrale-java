@@ -24,9 +24,11 @@ public class ExampleController {
 
     @GetMapping("/")
     public String hello() {return("Hello !");}
-    @GetMapping("play")
-    public String play(@RequestParam String playerName1, @RequestParam String playerName2){
-        return gameService.playGame(playerName1, playerName2);
+    @GetMapping("/play")
+    public String play(@RequestParam Integer player1Id, @RequestParam Integer player2Id, @RequestParam Integer handPlayer1, @RequestParam Integer handPlayer2){
+        gameService.setHand(player1Id, handPlayer1);
+        gameService.setHand(player2Id, handPlayer2);
+        return gameService.playGame(player1Id, player2Id, handPlayer1, handPlayer2);
     }
 
     @PostMapping("/player")
@@ -50,12 +52,17 @@ public class ExampleController {
     @GetMapping("/history")
     public List<String> seeHistory(){ return gameService.getHistoryOfWinner();}
 
-    @PostMapping("/set")
-    public void setHand(@RequestParam String name,
-                        @RequestParam int hand ){
-        gameService.setHand(name, hand);
-
+    @GetMapping("/game-stats")
+    public String getStats(@RequestParam Integer playerId1){
+        return gameService.getStats(playerId1);
     }
+
+    //@PostMapping("/set")
+    //public void setHand(@RequestParam String name,
+      //                  @RequestParam int hand ){
+        //gameService.setHand(name, hand);
+
+    //}
 
     //@PostMapping("pouet")
     //public void pouet(@RequestParam Integer id, @RequestParam String name){ playerDBService.addPlayer(id, name);}
